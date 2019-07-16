@@ -1,0 +1,46 @@
+CREATE DATABASE empresa;
+use empresa;
+
+CREATE TABLE `usuarios` (
+`cpf` double NOT NULL PRIMARY KEY,
+`nome` VARCHAR(30) NOT NULL ,
+`sobrenome` VARCHAR(50) NOT NULL,
+`email` VARCHAR(50) NOT NULL ,
+`senha` VARCHAR(30) NOT NULL ,
+`telefone` VARCHAR(20),
+`celular` VARCHAR(20),
+`nivelacesso` int,
+`datanascimento` VARCHAR(15),
+`departamento` VARCHAR(50),
+`id_superiorresponsavel` double
+); 
+
+CREATE TABLE `departamentos` (
+`nome` VARCHAR(50) NOT NULL PRIMARY KEY,
+`id_funcionarioresponsavel` double NOT NULL
+ );
+
+CREATE TABLE `categoriasProduto` (
+`id_categoria` INT PRIMARY KEY AUTO_INCREMENT,
+`nome` VARCHAR(70) NOT NULL 
+ );
+
+CREATE TABLE `produtos` (
+`id_produto` INT PRIMARY KEY AUTO_INCREMENT,
+`nome` VARCHAR(80) NOT NULL,
+`descricao` VARCHAR(200),
+`quantidade` INT NOT NULL,
+`preco` DOUBLE NOT NULL,
+`id_categoria` INT NOT NULL 
+ );
+
+
+ALTER TABLE `departamentos` ADD CONSTRAINT `fk_funcionarioresponsavel` FOREIGN KEY 
+
+(`id_funcionarioresponsavel`) REFERENCES `usuarios` (`cpf`);
+
+ALTER TABLE `produtos` ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) 
+
+REFERENCES `categoriasProduto` (`id_categoria`);
+
+INSERT INTO `usuarios`(`cpf`, `nome`, `sobrenome`, `email`, `senha`, `telefone`, `celular`, `nivelacesso`, `datanascimento`, `departamento`, `id_superiorresponsavel`) VALUES (58153692097, 'Admin', 'do Santos', 'admin@gmail.com','admin','(11) 1111-1111','(11) 1111-1111',1,'11/11/1111','Administração',0)
